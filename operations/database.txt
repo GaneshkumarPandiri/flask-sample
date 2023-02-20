@@ -1,0 +1,64 @@
+
+
+products
+
+id NOT NULL PRIMARY KEY AUTO_INCREMENT,
+productName VARCHAR(250) NOT NULL,
+brand VARCHAR(250) NOT NULL,
+price INT NOT NULL,
+ratings FLOAT NOT NULL,
+imgeURL VARCHAR(500) NOT NULL,
+description TEXT NOT NULL
+
+reviews
+
+id ,
+productId,
+review,
+timestamp
+
+cart
+id NOT NULL PRIMARY KEY AUTO_INCREMENT,
+productId INT NOT NULL,
+quantity INT NOT NULL,
+
+       
+def processUsercreate(reqData):
+    # Check type of data
+    if isinstance(reqData, dict):
+        userid = "MACHINT" + str(randint(11111,99999))
+        userid = str(userid) 
+        reqData['requestdata']['userid'] = userid
+        data = '","'.join(reqData['requestdata'].values())
+        data = '"' + data + '"'
+        sta = dbilayer.insertintodbwocondition(constants.columns_users_table,data,"users")
+        if sta == "Success":
+            respsucc = {}
+            respsucc = {"responseid": reqData['requestid'], "responsefor":"createuser","responseto":"UI","responsedata": {"email":reqData['requestdata']['email'], "message":"User Created Successfully" }}
+            return respsucc
+        else:
+            respfail = {}
+            respfail = {"responseid": reqData['requestid'], "responsefor":"createuser","responseto":"UI","responsedata": {"message":"User Creation Failed"}}
+            return  respfail
+    else:
+        respfail = {}
+        respfail = {"responseid": reqData['requestid'], "responsefor":"createuser","responseto":"UI","responsedata": {"message":"User Creation Failed"}}
+        return  respfail
+
+
+@app.route("/products", methods  = ["POST", "GET"])
+@cross_origin
+def products_response():
+    if request.method == "POST":
+        req = request.json
+        resp = methods.insert_products(req)
+        return resp
+    if request.method == "GET":
+        resp = methods.get_products()
+        return jsonify(resp)
+
+
+
+
+
+

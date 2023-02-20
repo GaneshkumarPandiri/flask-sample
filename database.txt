@@ -1,0 +1,28 @@
+
+
+products
+
+id NOT NULL PRIMARY KEY AUTO_INCREMENT,
+productName VARCHAR(250) NOT NULL,
+brand VARCHAR(250) NOT NULL,
+price INT NOT NULL,
+ratings FLOAT NOT NULL,
+imgeURL VARCHAR(500) NOT NULL
+
+productDetails
+
+id NOT NULL PRIMARY KEY AUTO_INCREMENT
+productId INT NOT NULL FOREIGN KEY,
+description TEXT NOT NULL,
+reviews
+
+cart
+id NOT NULL PRIMARY KEY AUTO_INCREMENT,
+productId INT NOT NULL,
+quantity INT NOT NULL,
+
+
+
+
+
+
