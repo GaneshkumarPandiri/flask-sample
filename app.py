@@ -12,7 +12,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def get_sample_response():
     return {
         "Name" : "GaneshKumar Pandiri",
-        "Email" : "ganesh.pandiri@machint.com",
         "age" : "26"
     }
 
